@@ -27,4 +27,7 @@ public class Employee extends AuditedEntity{
 
     @ManyToOne
     private CostCenter costCenter;
+
+    @ManyToOne
+    private Position position;
 }
