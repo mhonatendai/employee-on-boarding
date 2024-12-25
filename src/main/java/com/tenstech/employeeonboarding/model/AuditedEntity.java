@@ -1,8 +1,6 @@
 package com.tenstech.employeeonboarding.model;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.EntityListeners;
-import jakarta.persistence.MappedSuperclass;
+import jakarta.persistence.*;
 import lombok.Setter;
 import org.springframework.data.annotation.CreatedBy;
 import org.springframework.data.annotation.CreatedDate;
@@ -22,6 +20,11 @@ public abstract class AuditedEntity implements Serializable {
     protected LocalDateTime lastModified;
     protected String createdBy;
     protected String modifiedBy;
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id", insertable = false, nullable = false, updatable = false)
+    private Long id;
 
     @CreatedDate
     @Column(name = "created", nullable = false, updatable = false)
