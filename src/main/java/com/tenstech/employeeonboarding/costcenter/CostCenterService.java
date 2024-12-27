@@ -1,5 +1,6 @@
 package com.tenstech.employeeonboarding.costcenter;
 
+import com.tenstech.employeeonboarding.common.mapper.TypeMapper;
 import com.tenstech.employeeonboarding.model.CostCenter;
 import jakarta.persistence.EntityNotFoundException;
 import org.springframework.stereotype.Service;
@@ -10,32 +11,33 @@ import java.util.NoSuchElementException;
 @Service
 public class CostCenterService {
 
-    private final CostCenterRepository repository;
+    private final CostCenterRepository costCenterRepository;
 
-    public CostCenterService(CostCenterRepository repository) {
-        this.repository = repository;
+    private final TypeMapper typeMapper;
+
+    public CostCenterService(CostCenterRepository costCenterRepository, TypeMapper typeMapper) {
+        this.costCenterRepository = costCenterRepository;
+        this.typeMapper = typeMapper;
     }
 
-    public CostCenter create(CostCenterDTO costCenterDTO) {
-        CostCenter costCenter = new CostCenter();
-        costCenter.setName(costCenterDTO.getName());
-        costCenter.setDescription(costCenterDTO.getDescription());
-        return repository.save(costCenter);
+    public CostCenterDTO create(CostCenterDTO costCenterDTO) {
+        CostCenter newCostCenter = typeMapper.toCostCenter(costCenterDTO);
+        return typeMapper.toCostCenterDTO(costCenterRepository.save(newCostCenter));
     }
 
-    public CostCenter findById(Long id) throws EntityNotFoundException {
-        return repository.findById(id)
+    public CostCenterDTO findById(Long id) throws EntityNotFoundException {
+        CostCenter costCenter = costCenterRepository.findById(id)
                 .orElseThrow(() -> new NoSuchElementException("No entity found with id: " + id));
+        return typeMapper.toCostCenterDTO(costCenter);
     }
 
-    public List<CostCenter> findAll() {
-        return repository.findAll();
+    public List<CostCenterDTO> findAll() {
+        return typeMapper.toCostCenterDTOs(costCenterRepository.findAll());
     }
 
-    public CostCenter update(Long id, CostCenterDTO costCenterDTO) {
-        CostCenter costCenter = findById(id);
-        costCenter.setName(costCenterDTO.getName());
-        costCenter.setDescription(costCenterDTO.getDescription());
-        return repository.save(costCenter);
+    public CostCenterDTO update(Long id, CostCenterDTO costCenterDTO) {
+        CostCenter costCenter = costCenterRepository.findById(id)
+                .orElseThrow(() -> new NoSuchElementException("No entity found with id: " + id));
+        return typeMapper.toCostCenterDTO(costCenterRepository.save(costCenter));
     }
 }
