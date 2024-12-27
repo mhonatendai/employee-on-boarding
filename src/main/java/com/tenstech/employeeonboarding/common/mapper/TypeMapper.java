@@ -23,6 +23,4 @@ public interface TypeMapper {
 
     List<CostCenterDTO> toCostCenterDTOs(List<CostCenter> costCenters);
 
-
-
 }
