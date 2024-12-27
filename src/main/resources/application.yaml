@@ -1,0 +1,11 @@
+server:
+  port: 8087
+spring:
+  application:
+    name: employee-onboarding-core
+  profiles:
+    active: dev
+  jpa:
+    hibernate:
+      ddl-auto: update
+    show-sql: false
