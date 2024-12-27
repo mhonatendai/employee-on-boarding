@@ -30,9 +30,6 @@ public class Employee extends AuditedEntity{
     private String role;
 
     @ManyToOne
-    private Department department;
-
-    @ManyToOne
     private CostCenter costCenter;
 
     @ManyToOne
