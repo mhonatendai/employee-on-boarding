@@ -1,6 +1,7 @@
 package com.tenstech.employeeonboarding.model;
 
 import jakarta.persistence.*;
+import lombok.Getter;
 import lombok.Setter;
 import org.springframework.data.annotation.CreatedBy;
 import org.springframework.data.annotation.CreatedDate;
@@ -14,6 +15,7 @@ import java.time.LocalDateTime;
 @MappedSuperclass
 @EntityListeners(AuditingEntityListener.class)
 @Setter
+@Getter
 public abstract class AuditedEntity implements Serializable {
 
     protected LocalDateTime created;
