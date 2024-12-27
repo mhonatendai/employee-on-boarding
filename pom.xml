@@ -9,7 +9,7 @@
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
 	<groupId>com.tenstech</groupId>
-	<artifactId>employee-on-boarding</artifactId>
+	<artifactId>employee-onboarding-core</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<name>employee-on-boarding</name>
 	<description>Employee On-boarding</description>
