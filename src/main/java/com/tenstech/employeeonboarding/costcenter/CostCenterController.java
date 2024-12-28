@@ -17,8 +17,9 @@ public class CostCenterController {
     }
 
     @GetMapping
-    public List<CostCenterDTO> getAllCenters() {
-        return costCenterService.findAll();
+    public ResponseEntity<List<CostCenterDTO>> getAllCenters() {
+        List<CostCenterDTO> centers = costCenterService.findAll();
+        return ResponseEntity.ok(centers);
     }
 
     @GetMapping("/{id}")
