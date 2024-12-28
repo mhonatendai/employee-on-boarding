@@ -1,8 +1,10 @@
 package com.tenstech.employeeonboarding.common.mapper;
 
 import com.tenstech.employeeonboarding.costcenter.CostCenterDTO;
+import com.tenstech.employeeonboarding.department.DepartmentDTO;
 import com.tenstech.employeeonboarding.employee.EmployeeDTO;
 import com.tenstech.employeeonboarding.model.CostCenter;
+import com.tenstech.employeeonboarding.model.Department;
 import com.tenstech.employeeonboarding.model.Employee;
 import org.mapstruct.Mapper;
 
@@ -22,5 +24,11 @@ public interface TypeMapper {
     CostCenterDTO toCostCenterDTO(CostCenter costCenter);
 
     List<CostCenterDTO> toCostCenterDTOs(List<CostCenter> costCenters);
+
+    Department toDepartment(DepartmentDTO departmentDTO);
+
+    DepartmentDTO toDepartmentDTO(Department department);
+
+    List<DepartmentDTO> toDepartmentDTOs(List<Department> departments);
 
 }
