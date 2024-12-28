@@ -22,4 +22,7 @@ public class Department extends AuditedEntity{
     @Column
     @Enumerated(EnumType.STRING)
     private Status status;
+
+    @Column
+    private String code;
 }
