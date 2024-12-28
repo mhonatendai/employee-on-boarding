@@ -1,8 +1,7 @@
 package com.tenstech.employeeonboarding.model;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.ManyToOne;
+import com.tenstech.employeeonboarding.common.util.Status;
+import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -34,4 +33,8 @@ public class Employee extends AuditedEntity{
 
     @ManyToOne
     private Position position;
+
+    @Column
+    @Enumerated(EnumType.STRING)
+    private Status status;
 }
