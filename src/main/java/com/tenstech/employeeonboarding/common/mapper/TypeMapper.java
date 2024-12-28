@@ -7,6 +7,7 @@ import com.tenstech.employeeonboarding.model.CostCenter;
 import com.tenstech.employeeonboarding.model.Department;
 import com.tenstech.employeeonboarding.model.Employee;
 import org.mapstruct.Mapper;
+import org.mapstruct.MappingTarget;
 
 import java.util.List;
 

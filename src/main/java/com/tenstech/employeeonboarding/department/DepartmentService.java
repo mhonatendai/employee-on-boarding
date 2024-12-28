@@ -28,7 +28,7 @@ public class DepartmentService {
     public DepartmentDTO updateDepartment(Long id, DepartmentDTO departmentDTO) {
         Department department = departmentRepository.findById(id).orElseThrow(
                 ()-> new NoSuchElementException("Department with id " + id + " not found"));
-        return typeMapper.toDepartmentDTO(departmentRepository.save(department));
+        return department!=null?  typeMapper.toDepartmentDTO(departmentRepository.save(typeMapper.toDepartment(departmentDTO))): null;
     }
 
     public DepartmentDTO findById(Long id) {
