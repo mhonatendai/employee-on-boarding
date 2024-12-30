@@ -9,10 +9,10 @@
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
 	<groupId>com.tenstech</groupId>
-	<artifactId>employee-onboarding-core</artifactId>
+	<artifactId>nexus-core</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<name>employee-on-boarding</name>
-	<description>Employee On-boarding</description>
+	<name>nexus-core</name>
+	<description>Nexus Core Application</description>
 	<url/>
 	<licenses>
 		<license/>
@@ -81,7 +81,7 @@
 				<artifactId>spring-boot-maven-plugin</artifactId>
 				<configuration>
 					<executable>true</executable>
-					<finalName>employee-onboarding-core</finalName>
+					<finalName>nexus-core</finalName>
 					<excludes>
 						<exclude>
 							<groupId>org.projectlombok</groupId>
