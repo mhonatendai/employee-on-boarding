@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.NoSuchElementException;
+import java.util.Optional;
 
 @Service
 public class EmployeeService {
@@ -43,11 +44,11 @@ public class EmployeeService {
     }
 
     public EmployeeDTO authenticate(LoginDTO loginDTO) {
-        Employee employee = employeeRepository.findByUserName(loginDTO.getUserName());
+        Optional<Employee> optionalEmployee = Optional.ofNullable(employeeRepository.findByUserName(loginDTO.getUserName()));
 
-        if (employee != null && passwordEncoder.matches(loginDTO.getPassword(), employee.getPassword())) {
-            return typeMapper.toEmployeeDTO(employee);
-        }
-        return null;
+        return optionalEmployee
+                .filter(employee -> passwordEncoder.matches(loginDTO.getPassword(), employee.getPassword()))
+                .map(typeMapper::toEmployeeDTO)
+                .orElse(null);
     }
 }
