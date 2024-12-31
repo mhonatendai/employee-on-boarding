@@ -43,12 +43,7 @@ public class EmployeeController {
     @PostMapping("/login")
     public ResponseEntity<EmployeeDTO> login(@RequestBody LoginDTO loginDTO) {
         EmployeeDTO employee = employeeService.authenticate(loginDTO);
-
-        if (employee != null) {
-            return ResponseEntity.ok(employee);
-        } else {
-            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
-        }
+        return employee != null ? ResponseEntity.ok(employee) : ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
     }
 
 }
