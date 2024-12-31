@@ -1,8 +1,10 @@
 server:
   port: 8097
+  servlet:
+    context-path: /nexus-core
 spring:
   application:
-    name: employee-onboarding-core
+    name: nexus-core
   profiles:
     active: dev
   jpa:
