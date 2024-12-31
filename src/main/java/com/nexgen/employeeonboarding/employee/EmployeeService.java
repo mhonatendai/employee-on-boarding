@@ -2,6 +2,7 @@ package com.nexgen.employeeonboarding.employee;
 
 import com.nexgen.employeeonboarding.common.mapper.TypeMapper;
 import com.nexgen.employeeonboarding.model.Employee;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -12,10 +13,12 @@ public class EmployeeService {
 
     private final EmployeeRepository employeeRepository;
     private final TypeMapper typeMapper;
+    private final BCryptPasswordEncoder passwordEncoder;
 
-    public EmployeeService(EmployeeRepository employeeRepository, TypeMapper typeMapper) {
+    public EmployeeService(EmployeeRepository employeeRepository, TypeMapper typeMapper, BCryptPasswordEncoder passwordEncoder) {
         this.employeeRepository = employeeRepository;
         this.typeMapper = typeMapper;
+        this.passwordEncoder = passwordEncoder;
     }
 
     public EmployeeDTO createEmployee(EmployeeDTO employeeDTO) {
@@ -37,5 +40,14 @@ public class EmployeeService {
         Employee existingEmployee = employeeRepository.findById(id).orElseThrow(()->new NoSuchElementException("Employee not found"));
         Employee updatedEmployee = typeMapper.toEmployee(employeeDTO);
         return typeMapper.toEmployeeDTO(employeeRepository.save(updatedEmployee));
+    }
+
+    public EmployeeDTO authenticate(LoginDTO loginDTO) {
+        Employee employee = employeeRepository.findByUserName(loginDTO.getUserName());
+
+        if (employee != null && passwordEncoder.matches(loginDTO.getPassword(), employee.getPassword())) {
+            return typeMapper.toEmployeeDTO(employee);
+        }
+        return null;
     }
 }
