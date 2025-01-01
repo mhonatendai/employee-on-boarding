@@ -1,8 +1,11 @@
 package com.nexgen.employeeonboarding.employee;
 
 
+import com.nexgen.employeeonboarding.model.Role;
 import lombok.Getter;
 import lombok.Setter;
+
+import java.util.Set;
 
 @Getter
 @Setter
@@ -20,5 +23,7 @@ public class EmployeeDTO {
 
     private String password;
 
-    private String role;
+    private Set<Role> roles;
+
+    private String middleNames;
 }
