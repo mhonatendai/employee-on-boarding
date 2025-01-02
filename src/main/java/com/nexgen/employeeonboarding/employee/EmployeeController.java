@@ -1,5 +1,6 @@
 package com.nexgen.employeeonboarding.employee;
 
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -9,6 +10,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/api/employee")
+@Slf4j
 public class EmployeeController {
 
     private final EmployeeService employeeService;
@@ -48,6 +50,7 @@ public class EmployeeController {
 
     @PostMapping("/register")
     public ResponseEntity<EmployeeDTO> register(@RequestBody EmployeeDTO employeeDTO) {
+        log.info("Employee DTO : {}", employeeDTO);
         EmployeeDTO employee = employeeService.createEmployee(employeeDTO);
         return employee != null ? ResponseEntity.ok(employee) : ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
     }
