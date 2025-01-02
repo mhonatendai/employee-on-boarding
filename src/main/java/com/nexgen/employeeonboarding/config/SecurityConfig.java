@@ -24,14 +24,13 @@ public class SecurityConfig {
 
     private UserDetailsService userDetailsService;
 
+
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception{
 
         http.csrf(AbstractHttpConfigurer::disable)
                 .authorizeHttpRequests(authorize -> {
                     authorize
-                            .requestMatchers(PathRequest.toStaticResources().atCommonLocations()).permitAll()
-                            .requestMatchers(PathRequest.toH2Console()).permitAll()
                             .requestMatchers(new AntPathRequestMatcher("/api/employee/register")).permitAll()
                             .anyRequest().authenticated();
                 })
@@ -47,11 +46,5 @@ public class SecurityConfig {
     @Bean
     public PasswordEncoder passwordEncoder(){
         return new BCryptPasswordEncoder();
-    }
-
-
-    @Bean
-    public H2ConsoleProperties h2ConsoleProperties() {
-        return new H2ConsoleProperties();
     }
 }
