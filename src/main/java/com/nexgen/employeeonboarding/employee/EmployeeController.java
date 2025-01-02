@@ -46,4 +46,10 @@ public class EmployeeController {
         return employee != null ? ResponseEntity.ok(employee) : ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
     }
 
+    @PostMapping("/register")
+    public ResponseEntity<EmployeeDTO> register(@RequestBody EmployeeDTO employeeDTO) {
+        EmployeeDTO employee = employeeService.createEmployee(employeeDTO);
+        return employee != null ? ResponseEntity.ok(employee) : ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
+    }
+
 }

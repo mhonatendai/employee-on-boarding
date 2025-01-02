@@ -24,6 +24,7 @@ public class EmployeeService {
 
     public EmployeeDTO createEmployee(EmployeeDTO employeeDTO) {
         Employee newEmployee = typeMapper.toEmployee(employeeDTO);
+        newEmployee.setPassword(this.passwordEncoder.encode(employeeDTO.getPassword()));
         return typeMapper.toEmployeeDTO(employeeRepository.save(newEmployee));
     }
 
@@ -45,10 +46,10 @@ public class EmployeeService {
 
     public EmployeeDTO authenticate(LoginDTO loginDTO) {
         Optional<Employee> optionalEmployee = Optional.ofNullable(employeeRepository.findByUserName(loginDTO.getUserName()));
-
         return optionalEmployee
                 .filter(employee -> passwordEncoder.matches(loginDTO.getPassword(), employee.getPassword()))
                 .map(typeMapper::toEmployeeDTO)
                 .orElse(null);
     }
+
 }
