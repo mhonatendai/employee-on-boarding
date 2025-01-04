@@ -16,7 +16,7 @@ public class Employee extends AuditedEntity{
     private String firstName;
 
     @Column(nullable = false)
-    private String middleNames;
+    private String middleName;
 
     @Column(nullable = false)
     private String lastName;

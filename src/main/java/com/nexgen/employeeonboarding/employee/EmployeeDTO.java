@@ -4,7 +4,6 @@ package com.nexgen.employeeonboarding.employee;
 import com.nexgen.employeeonboarding.model.Role;
 import lombok.Getter;
 import lombok.Setter;
-import lombok.ToString;
 
 import java.util.Set;
 
@@ -26,7 +25,7 @@ public class EmployeeDTO {
 
     private Set<Role> roles;
 
-    private String middleNames;
+    private String middleName;
 
     @Override
     public String toString() {
@@ -37,7 +36,7 @@ public class EmployeeDTO {
                 ", emailAddress='" + emailAddress + '\'' +
                 ", phoneNumber='" + phoneNumber + '\'' +
                 ", roles=" + roles +
-                ", middleNames='" + middleNames + '\'' +
+                ", middleNames='" + middleName + '\'' +
                 '}';
     }
 }
