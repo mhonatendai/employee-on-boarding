@@ -24,17 +24,14 @@ public class SecurityConfig {
 
     private UserDetailsService userDetailsService;
 
-
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception{
 
         http.csrf(AbstractHttpConfigurer::disable)
-                .authorizeHttpRequests(authorize -> {
-                    authorize
-                            .requestMatchers(new AntPathRequestMatcher("/api/employee/register")).permitAll()
-                            .anyRequest().authenticated();
-                })
-                .httpBasic(Customizer.withDefaults());
+                .authorizeHttpRequests(authorize -> authorize
+                        .requestMatchers("/api/employee/register").permitAll()
+                        .anyRequest().authenticated()
+                );
         return http.build();
     }
 

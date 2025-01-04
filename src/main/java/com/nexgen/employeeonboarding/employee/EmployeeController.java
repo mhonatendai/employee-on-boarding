@@ -11,7 +11,7 @@ import java.util.List;
 @RestController
 @RequestMapping("/api/employee")
 @Slf4j
-@CrossOrigin(origins = "http://localhost:3000")
+@CrossOrigin(origins = "http://localhost:3000, http://192.168.1.159:3000")
 public class EmployeeController {
 
     private final EmployeeService employeeService;

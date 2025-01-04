@@ -2,6 +2,7 @@ package com.nexgen.employeeonboarding.employee;
 
 import com.nexgen.employeeonboarding.common.mapper.TypeMapper;
 import com.nexgen.employeeonboarding.model.Employee;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
@@ -14,17 +15,17 @@ public class EmployeeService {
 
     private final EmployeeRepository employeeRepository;
     private final TypeMapper typeMapper;
-    private final BCryptPasswordEncoder passwordEncoder;
+    private final BCryptPasswordEncoder bCryptPasswordEncoder;
 
-    public EmployeeService(EmployeeRepository employeeRepository, TypeMapper typeMapper, BCryptPasswordEncoder passwordEncoder) {
+    public EmployeeService(EmployeeRepository employeeRepository, TypeMapper typeMapper, BCryptPasswordEncoder bCryptPasswordEncoder) {
         this.employeeRepository = employeeRepository;
         this.typeMapper = typeMapper;
-        this.passwordEncoder = passwordEncoder;
+        this.bCryptPasswordEncoder = bCryptPasswordEncoder;
     }
 
     public EmployeeDTO createEmployee(EmployeeDTO employeeDTO) {
         Employee newEmployee = typeMapper.toEmployee(employeeDTO);
-        newEmployee.setPassword(this.passwordEncoder.encode(employeeDTO.getPassword()));
+        newEmployee.setPassword(this.bCryptPasswordEncoder.encode(employeeDTO.getPassword()));
         return typeMapper.toEmployeeDTO(employeeRepository.save(newEmployee));
     }
 
@@ -47,7 +48,7 @@ public class EmployeeService {
     public EmployeeDTO authenticate(LoginDTO loginDTO) {
         Optional<Employee> optionalEmployee = Optional.ofNullable(employeeRepository.findByUserName(loginDTO.getUserName()));
         return optionalEmployee
-                .filter(employee -> passwordEncoder.matches(loginDTO.getPassword(), employee.getPassword()))
+                .filter(employee -> bCryptPasswordEncoder.matches(loginDTO.getPassword(), employee.getPassword()))
                 .map(typeMapper::toEmployeeDTO)
                 .orElse(null);
     }
