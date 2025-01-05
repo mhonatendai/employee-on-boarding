@@ -54,4 +54,8 @@ public class EmployeeService {
                 .orElse(null);
     }
 
+    public Optional<Employee> findByUserName(String userName){
+        return Optional.ofNullable(employeeRepository.findByUserName(userName));
+    }
+
 }
