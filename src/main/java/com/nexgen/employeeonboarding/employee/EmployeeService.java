@@ -26,6 +26,7 @@ public class EmployeeService {
     public EmployeeDTO createEmployee(EmployeeDTO employeeDTO) {
         Employee newEmployee = typeMapper.toEmployee(employeeDTO);
         newEmployee.setPassword(this.bCryptPasswordEncoder.encode(employeeDTO.getPassword()));
+        newEmployee.setUserName(employeeDTO.getEmailAddress());
         return typeMapper.toEmployeeDTO(employeeRepository.save(newEmployee));
     }
 
