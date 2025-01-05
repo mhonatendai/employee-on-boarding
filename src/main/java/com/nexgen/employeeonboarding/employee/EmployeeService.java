@@ -2,10 +2,12 @@ package com.nexgen.employeeonboarding.employee;
 
 import com.nexgen.employeeonboarding.common.mapper.TypeMapper;
 import com.nexgen.employeeonboarding.model.Employee;
+import com.nexgen.employeeonboarding.model.Role;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import java.util.HashSet;
 import java.util.List;
 import java.util.NoSuchElementException;
 import java.util.Optional;
@@ -27,6 +29,8 @@ public class EmployeeService {
         Employee newEmployee = typeMapper.toEmployee(employeeDTO);
         newEmployee.setPassword(this.bCryptPasswordEncoder.encode(employeeDTO.getPassword()));
         newEmployee.setUserName(employeeDTO.getEmailAddress());
+        HashSet<Role> roles = new HashSet<>();
+        newEmployee.setRoles(roles);
         return typeMapper.toEmployeeDTO(employeeRepository.save(newEmployee));
     }
 
